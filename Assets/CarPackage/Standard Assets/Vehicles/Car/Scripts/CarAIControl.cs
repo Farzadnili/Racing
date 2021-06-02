@@ -7,6 +7,8 @@ namespace UnityStandardAssets.Vehicles.Car
     [RequireComponent(typeof (CarController))]
     public class CarAIControl : MonoBehaviour
     {
+        public GameObject Point;
+        public int index;
         public enum BrakeCondition
         {
             NeverBrake,                 // the car simply accelerates at full throttle all the time.
@@ -34,7 +36,7 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_AccelWanderSpeed = 0.1f;                                 // how fast the cars acceleration wandering will fluctuate
         [SerializeField] private BrakeCondition m_BrakeCondition = BrakeCondition.TargetDistance; // what should the AI consider when accelerating/braking?
         [SerializeField] private bool m_Driving;                                                  // whether the AI is currently actively driving or stopped.
-        [SerializeField] private Transform m_Target;                                              // 'target' the target object to aim for.
+        [SerializeField] private Transform m_Target;                                                // 'target' the target object to aim for.
         [SerializeField] private bool m_StopWhenTargetReached;                                    // should we stop driving when we reach the target?
         [SerializeField] private float m_ReachTargetThreshold = 2;                                // proximity to target to consider we 'reached' it, and stop driving.
 
@@ -48,6 +50,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void Awake()
         {
+            SetTarget(Point.transform.GetChild(0));
             // get the car controller reference
             m_CarController = GetComponent<CarController>();
 
@@ -211,6 +214,9 @@ namespace UnityStandardAssets.Vehicles.Car
             }
         }
 
+        public void SetNewTarget(){
+            SetTarget(Point.transform.GetChild(++index));
+        }
 
         public void SetTarget(Transform target)
         {

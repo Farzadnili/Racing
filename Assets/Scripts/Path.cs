@@ -7,14 +7,7 @@ public class Path : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(transform.childCount);
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        for (var i = 0; i < transform.childCount; i++)
+       for (var i = 0; i < transform.childCount; i++)
         {
             //Draw line between Pints
           if(i > 0){
@@ -26,4 +19,11 @@ public class Path : MonoBehaviour
             transform.GetChild(i).name = "Point" + i;
         }
     }
-}
+        
+    }
+
+    // Update is called once per frame
+//     void Update()
+//     {
+        
+// }
